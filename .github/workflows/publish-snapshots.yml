@@ -1,4 +1,4 @@
-name: Draft Release
+name: Publish snapshots to maven
 
 on:
   push:
@@ -27,4 +27,4 @@ jobs:
         run: |
           echo "SONATYPE_USERNAME=$(aws secretsmanager get-secret-value --secret-id maven-snapshots-username --query SecretString --output text)" >> $GITHUB_ENV
           echo "SONATYPE_PASSWORD=$(aws secretsmanager get-secret-value --secret-id maven-snapshots-password --query SecretString --output text)" >> $GITHUB_ENV
-          echo username: $SONATYPE_USERNAME $SONATYPE_PASSWORD
+          echo username: env.SONATYPE_USERNAME env.SONATYPE_PASSWORD
