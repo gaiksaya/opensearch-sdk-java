@@ -24,7 +24,7 @@ jobs:
           role-to-assume: ${{ secrets.GET_SECRET_IAM_ROLE }}
           aws-region: us-east-1
       - name: publish snapshots to maven
-        env: 
-          SONATYPE_USERNAME: `aws secretsmanager get-secret-value --secret-id maven-snapshots-username --query SecretString --output text`
-          SONATYPE_PASSWORD: `aws secretsmanager get-secret-value --secret-id maven-snapshots-password --query SecretString --output text`
-        run: echo $SONATYPE_USERNAME $SONATYPE_PASSWORD
+        run: |
+          echo "SONATYPE_USERNAME=$(aws secretsmanager get-secret-value --secret-id maven-snapshots-username --query SecretString --output text)" >> $GITHUB_ENV
+          echo "SONATYPE_PASSWORD=$(aws secretsmanager get-secret-value --secret-id maven-snapshots-password --query SecretString --output text)" >> $GITHUB_ENV
+          echo $SONATYPE_USERNAME $SONATYPE_PASSWORD
