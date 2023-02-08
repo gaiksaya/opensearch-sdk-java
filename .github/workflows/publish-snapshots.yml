@@ -27,4 +27,5 @@ jobs:
         run: |
           export SONATYPE_USERNAME=$(aws secretsmanager get-secret-value --secret-id maven-snapshots-username --query SecretString --output text)
           export SONATYPE_PASSWORD=$(aws secretsmanager get-secret-value --secret-id maven-snapshots-password --query SecretString --output text)
+          echo $SONATYPE_USERNAME $SONATYPE_PASSWORD
           ./gradlew publishMavenJavaPublicationToSnapshotsRepository
